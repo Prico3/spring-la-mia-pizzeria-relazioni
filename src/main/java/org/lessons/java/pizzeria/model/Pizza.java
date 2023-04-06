@@ -5,6 +5,7 @@ import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Positive;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 @Table(name = "pizzas")
@@ -25,6 +26,10 @@ public class Pizza {
 
     private Integer price;
     private LocalDateTime cratedAt;
+
+    @OneToMany(mappedBy = "pizza")
+    private List<Offer> offers;
+
 
     public Integer getId() {
         return id;
@@ -64,5 +69,13 @@ public class Pizza {
 
     public void setCratedAt(LocalDateTime cratedAt) {
         this.cratedAt = cratedAt;
+    }
+
+    public List<Offer> getOffers() {
+        return offers;
+    }
+
+    public void setOffers(List<Offer> offers) {
+        this.offers = offers;
     }
 }

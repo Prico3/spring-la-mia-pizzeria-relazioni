@@ -20,6 +20,28 @@
             </dd>
         </dl>
     </div>
+    <!--    Offers-->
+    <h1>Offers</h1>
+    <table class="table">
+        <thead>
+        <tr>
+
+            <th>Title</th>
+            <th>Start Date</th>
+            <th>Expire Date</th>
+        </tr>
+
+        </thead>
+        <tbody>
+        <tr th:each="offer : *{offers}" th:object="${offer}">
+            <td th:text="*{title}"></td>
+            <td th:text="${#temporals.format(offer.startDate, 'dd/MM/yyyy')}"></td>
+            <td th:text="${#temporals.format(offer.expireDate, 'dd/MM/yyyy')}"></td>
+
+
+        </tr>
+        </tbody>
+    </table>
 </div>
 
 </body>
