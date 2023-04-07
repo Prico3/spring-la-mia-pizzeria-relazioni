@@ -21,6 +21,7 @@ public class PizzaService {
         pizzaToPersist.setPrice(formPizza.getPrice());
         pizzaToPersist.setDescription(formPizza.getDescription());
         pizzaToPersist.setCratedAt(LocalDateTime.now());
+        pizzaToPersist.setIngredients(formPizza.getIngredients());
         return pizzaRepository.save(pizzaToPersist);
     }
 

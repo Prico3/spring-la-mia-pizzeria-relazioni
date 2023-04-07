@@ -6,6 +6,7 @@ import jakarta.validation.constraints.Positive;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "pizzas")
@@ -29,6 +30,9 @@ public class Pizza {
 
     @OneToMany(mappedBy = "pizza")
     private List<Offer> offers;
+
+    @ManyToMany
+    private Set<Ingredient> ingredients;
 
 
     public Integer getId() {
@@ -77,5 +81,13 @@ public class Pizza {
 
     public void setOffers(List<Offer> offers) {
         this.offers = offers;
+    }
+
+    public Set<Ingredient> getIngredients() {
+        return ingredients;
+    }
+
+    public void setIngredients(Set<Ingredient> ingredients) {
+        this.ingredients = ingredients;
     }
 }
