@@ -71,7 +71,7 @@ public class PizzaController {
     }
 
     @PostMapping("/create")
-    public String doCreate(@Valid @ModelAttribute("pizza") Pizza formPizza, BindingResult bindingResult) {
+    public String doCreate(@Valid @ModelAttribute("pizza") Pizza formPizza, BindingResult bindingResult, Model model) {
         //Validazione
         boolean hasErrors = bindingResult.hasErrors();
         //custom name validation
@@ -82,6 +82,7 @@ public class PizzaController {
         }
         if (hasErrors) {
             //ritorno la view con il form
+            model.addAttribute("ingredientList", ingredientService.getAll());
             return "pizzas/create";
         }
         //se non ci sono errori lo persisto
@@ -94,6 +95,7 @@ public class PizzaController {
         try {
             Pizza pizza = pizzaService.getById(id);
             model.addAttribute("pizza", pizza);
+            model.addAttribute("ingredientList", ingredientService.getAll());
             return "/pizzas/edit";
         } catch (RuntimeException e) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "pizza with id " + id + " not found");
@@ -101,7 +103,7 @@ public class PizzaController {
     }
 
     @PostMapping("/edit/{id}")
-    public String doEdit(@PathVariable Integer id, @Valid @ModelAttribute("pizza") Pizza formPizza, BindingResult bindingResult) {
+    public String doEdit(@PathVariable Integer id, @Valid @ModelAttribute("pizza") Pizza formPizza, BindingResult bindingResult, Model model) {
         //Validazioni
         if (!pizzaService.validName(formPizza)) {
             //aggiungo un errore al binding result
@@ -109,6 +111,7 @@ public class PizzaController {
         }
         if (bindingResult.hasErrors()) {
             //ricreo la view precompilata
+            model.addAttribute("ingredientList", ingredientService.getAll());
             return "/pizzas/edit";
         }
         //persisto la pizza

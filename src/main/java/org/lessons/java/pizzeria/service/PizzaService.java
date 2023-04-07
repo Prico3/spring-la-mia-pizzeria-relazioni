@@ -30,6 +30,8 @@ public class PizzaService {
         pizzaToUpdate.setName(formPizza.getName());
         pizzaToUpdate.setDescription(formPizza.getDescription());
         pizzaToUpdate.setPrice(formPizza.getPrice());
+        pizzaToUpdate.setIngredients(formPizza.getIngredients());
+
         return pizzaRepository.save(pizzaToUpdate);
     }
 
